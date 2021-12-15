@@ -59,7 +59,7 @@ if /i %eula%==false (
     call :center Raiding is against Discord TOS, so use VPN.
     echo.
     call :center Don't try to crack or/and skid this tool [software].
-    call :center More info at dsc.gg/sixcrew
+    call :center More info at dsc.gg/shrekova-bazina
     echo.[90m
     call :center Press any key to accept.
     call :center You'll be no longer asked again.
@@ -107,12 +107,20 @@ ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.g
 ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg
 ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/
 ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/s
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/si
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/six
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixc
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcr
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcre
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sh
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shr
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shre
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrek
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shreko
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekov
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-b
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-ba
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-baz
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazi
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazin
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina
 
 rem Verification the license key
 if exist "key.key" call :verifyKey
@@ -176,40 +184,40 @@ set req=0
 set count=0
 for /f "tokens=*" %%a in (webhooks.txt) do set /a count+=1
 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^|
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| L
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Lo
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loa
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Load
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loade
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded 
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count!
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! w
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! we
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! web
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! webh
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! webho
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! webhoo
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! webhook
-ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/sixcrew ^| Loaded !count! webhooks
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^|
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| L
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Lo
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loa
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Load
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loade
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded 
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count!
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! w
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! we
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! web
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! webh
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! webho
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! webhoo
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! webhook
+ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! webhooks
 
 
 endlocal
