@@ -26,7 +26,7 @@ rem Checking for update, if update is availabile, update software automaticlly.
 if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
-for /f "tokens=*" %%v in ('fetch https://github.com/decko2/wsm/raw/main/sum.dat') do set sum=%%v
+for /f "tokens=*" %%v in ('fetch https://github.com/decko2/websmash/raw/main/sum.dat') do set sum=%%v
 
 :: for /f "tokens=1" %%a in ('sum "%~nxdp0"') do if not "%%a"=="%sum%" (
 ::     if exist smashwrn.exe start /wait smashwrn.exe
