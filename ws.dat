@@ -222,18 +222,23 @@ ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| L
 
 endlocal
 
+:menum
 cls
 call :logo
 echo.[97m
 rem Selection menu of spammer.
 call :typo Do you want something?
-echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam [30m^| [37m[C][90montent only[30m?
 echo.
-choice /c ECBM /m "" /n
+
+echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
+echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check[30m?
+echo.
+choice /c ECBMU /m "" /n
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
     if %errorlevel% equ 4 goto media
+    if %errorlevel% equ 5 goto updateCheck
     set type=content
 )
 
@@ -529,3 +534,17 @@ exit /b
 rem Webhook Smasher - Discord Webhook MultiSpammer
 rem You don't have allowed to modify this software, using program,
 rem you're accept EULA automaticlly.
+
+:updateCheck
+
+echo.
+call :typo Searching for availabile updates
+
+if not exist update\NoUpdate.log call update.bat
+if not exist update\NoUpdate.log if %errorlevel%==1 (
+    call :typo Updating software
+    timeout /nobreak /t 1 >nul
+    exit
+)
+
+goto menum
