@@ -1,2 +1,0 @@
-full=true
-fullUrl=[mediafire:none]
