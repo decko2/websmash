@@ -538,13 +538,9 @@ rem you're accept EULA automaticlly.
 :updateCheck
 
 echo.
-call :typo Searching for availabile updates
+call :typo Searching for Updates...
 
 if not exist update\NoUpdate.log call update.bat
-if not exist update\NoUpdate.log if %errorlevel%==1 (
-    call :typo Updating software
-    timeout /nobreak /t 1 >nul
-    exit
-)
+if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
 goto menum
