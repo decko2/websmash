@@ -231,14 +231,15 @@ call :typo Do you want something?
 echo.
 
 echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
-echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check[30m?
+echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[S][90mhow Changelog[30m?
 echo.
-choice /c ECBMU /m "" /n
+choice /c ECBMUS /m "" /n
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
     if %errorlevel% equ 4 goto media
     if %errorlevel% equ 5 goto updateCheck
+    if %errorlevel% equ 6 goto fetchChangelog
     set type=content
 )
 
@@ -542,5 +543,19 @@ call :typo Searching for Updates...
 
 if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
+
+goto menum
+
+:fetchChangelog
+
+if exist changelog.exe copy changelog.exe "%temp%" >nul
+if exist update\changelog.exe copy update\changelog.exe "%temp%" >nul
+
+set ph=%cd%
+cd "%temp%"
+if exist changelog.txt del /f /q changelog.txt
+fetch https://github.com/decko2/websmash/raw/main/changelog.txt "changelog.txt"
+start changelog.exe
+cd "%ph%"
 
 goto menum
