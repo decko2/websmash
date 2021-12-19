@@ -1,0 +1,2 @@
+- Some bug fixes
+- Security improvements
