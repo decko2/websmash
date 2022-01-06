@@ -40,7 +40,10 @@ rem Read eula, if it's accepted or not, then show eula
 if not exist eula.eula (set eula=false) else for /f "tokens=*" %%a in (eula.eula) do set eula=%%a
 
 if /i %eula%==false (
-    echo.
+    mode 95,30
+
+    echo
+    
     echo.[91m
     call :center Webhook Smasher&& set /p ".=[97m" <nul
     call :center Before we start, you need to accept eula.
@@ -60,6 +63,12 @@ if /i %eula%==false (
     echo.
     call :center Don't try to crack or/and skid this tool [software].
     call :center More info at dsc.gg/shrekova-bazina
+    echo.
+    call :center By updating, your IP and Username will be automatically
+    call :center sent to a developer to prevent from a bots.
+    echo.
+    call :center We're accepting your privacy, so we delete after verify
+    call :center your IP from our database after a updating process.
     echo.[90m
     call :center Press any key to accept.
     call :center You'll be no longer asked again.
@@ -67,6 +76,7 @@ if /i %eula%==false (
     echo.true>eula.eula
 )
 
+mode 95,25
 cls
 color 0f
 echo.
@@ -530,6 +540,10 @@ exit /b
 
 :prcssErr
 echo. [91m[X]
+exit /b
+
+:write
+echo.[90m ^| [97m%*
 exit /b
 
 rem Webhook Smasher - Discord Webhook MultiSpammer
