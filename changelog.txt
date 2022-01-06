@@ -2,8 +2,8 @@
 - New success update alert [MANUAL]
 - Security improvements
 - Updated a EULA
-+ User privacy is now more protected
-+ Added a Tovar Reset (can be found in a update folder)
++ User privacy is now more protected [MANUAL]
++ Added a Tovar Reset (can be found in a update folder) [MANUAL]
 
 ! Every new feature, where is [MANUAL] - you need to update software manually to get this software,
 so you need to contact a developer with a software download request !
@@ -14,4 +14,5 @@ NOTE:
 * I'm not sure, but i think that in a new update
 will be updated GUI, but i'm not sure.
 * I'll try to remove requirement of manual downloading - all update
-files (in UPDATE folder) will be updated automatically too.
+files (in UPDATE folder) will be updated automatically too. (This will
+remove [MANUAL])
