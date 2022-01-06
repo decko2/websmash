@@ -40,11 +40,11 @@ rem Read eula, if it's accepted or not, then show eula
 if not exist eula.eula (set eula=false) else for /f "tokens=*" %%a in (eula.eula) do set eula=%%a
 
 if /i %eula%==false (
-    mode 95,30
 
-    echo
+    mode 95,30
+    color 0c
+    echo.
     
-    echo.[91m
     call :center Webhook Smasher&& set /p ".=[97m" <nul
     call :center Before we start, you need to accept eula.
     echo.[37m
