@@ -14,6 +14,9 @@ rem as malware and you can get term to your account.
 rem - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 rem Don't tell on big servers that, you have this tool! Again, anyone
 rem can report you on support and your account will get term.
+rem - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+rem We're recommanding to read this
+rem https://pastebin.com/X2qFJcZw
 rem ==========================================================================
 
 cls
@@ -41,8 +44,9 @@ if not exist eula.eula (set eula=false) else for /f "tokens=*" %%a in (eula.eula
 
 if /i %eula%==false (
 
-    mode 95,30
+    mode 95,31
     color 0c
+    echo.
     echo.
     
     call :center Webhook Smasher&& set /p ".=[97m" <nul
@@ -54,7 +58,7 @@ if /i %eula%==false (
     call :center You don't have allowed to modify Webhook Smasher.
     call :center Don't share your license key.
     echo.
-    call :center Windows 10 is required, because in older
+    call :center Windows 10 or newer is required, because in older
     call :center versions is not 'curl' command.
     echo.
     call :center This tool is for raiding on platform Discord.
@@ -67,8 +71,8 @@ if /i %eula%==false (
     call :center By updating, your IP and Username will be automatically
     call :center sent to a developer to prevent from a bots.
     echo.
-    call :center We're accepting your privacy, so we delete after verify
-    call :center your IP from our database after a updating process.
+    call :center Please read this
+    call :center https://pastebin.com/X2qFJcZw
     echo.[90m
     call :center Press any key to accept.
     call :center You'll be no longer asked again.
