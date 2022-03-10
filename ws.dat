@@ -255,7 +255,6 @@ echo.
 echo.
 echo.
 echo.
-echo.
 ::echo.
 call :write Beta Testers - Mario
 
