@@ -1,7 +1,4 @@
-+ Complete auto-update of software
-+ Some new functions <3
-+ Security and bugs fixes
+- Small update in EULA
++ Added uninstallation (update\Unins..)
 
-*to get auto-update completly functional, please update now manually your software, to get all newest functions and this new feature - complete auto-update of all files... this feature will remove your requirements of anthoner manual update.
-
-<!> Bugs can be found in new auto-update! I'll try to fix it.
++ Added beta testers (Mario)
