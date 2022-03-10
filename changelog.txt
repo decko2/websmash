@@ -1,4 +1,4 @@
 - Small update in EULA
 + Added uninstallation (update\Unins..)
 
-+ Added beta testers (Mario)
++ Added beta testers
