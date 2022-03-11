@@ -25,11 +25,12 @@ cd "%~dp0"
 rem Adding files to path only for this batch file...
 set path=%path%;%cd%;%cd%\update
 
+if not exist "update\onstart" md "update\onstart" >nul
+
 rem Checking for update, if update is availabile, update software automaticlly.
 if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
-if not exist "update\onstart" md "update\onstart" >nul
 
 for /f %%i in ('dir /b /a "update\onstart"') do goto finalupd
 
@@ -590,6 +591,9 @@ goto menum
 
 :finalupd
 
+mode 60,10
+title Webhook Smasher Updater
+
 cls
 echo.
 call :write Don't close program please,
@@ -609,8 +613,10 @@ timeout /t 1 >nul
 set fail=0
 for /f "tokens=*" %%a in ('dir /b onstart') do if not exist "%%a" set fail=1
 
+timeout /t 2 >nul
 if %fail%==1 (
     cls
+    taskkill /f /im finalizeupdate.exe >nul
     call :write A problem has occured and some files
     call :write failed while updating ...
     echo.
@@ -621,6 +627,7 @@ if %fail%==1 (
     cd onstart
     del /f /q *.* >nul 2>&1
     cd ..
+    taskkill /f /im finalizeupdate.exe >nul
     start restfnl.vbs
     exit
 )
