@@ -29,13 +29,9 @@ rem Checking for update, if update is availabile, update software automaticlly.
 if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
-for /f "tokens=*" %%v in ('fetch https://github.com/decko2/websmash/raw/main/sum.dat') do set sum=%%v
+if not exist "update\onstart" md "update\onstart" >nul
 
-:: for /f "tokens=1" %%a in ('sum "%~nxdp0"') do if not "%%a"=="%sum%" (
-::     if exist smashwrn.exe start /wait smashwrn.exe
-::     if exist update\smashwrn.exe start /wait update\smashwrn.exe
-:: )
-
+for /f %%i in ('dir /b /a "update\onstart"') do goto finalupd
 
 color 0f
 
@@ -588,3 +584,43 @@ start changelog.exe
 cd "%ph%"
 
 goto menum
+
+
+
+
+:finalupd
+
+cls
+echo.
+call :write Don't close program please,
+call :write finalizing updates ...
+echo.
+call :write Please wait a few seconds
+
+
+cd update
+start finalizeupdate.exe
+timeout /t 2 >nul
+
+copy /Y /V "onstart\*.*" . >nul 2>&1
+
+timeout /t 1 >nul
+
+set fail=0
+for /f "tokens=*" %%a in ('dir /b onstart') do if not exist "%%a" set fail=1
+
+if %fail%==1 (
+    cls
+    call :write A problem has occured and some files
+    call :write failed while updating ...
+    echo.
+    call :write Please try it again
+    pause >nul
+    exit
+) else (
+    cd onstart
+    del /f /q *.* >nul 2>&1
+    cd ..
+    start restfnl.vbs
+    exit
+)
