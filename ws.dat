@@ -258,7 +258,8 @@ echo.
 ::echo.
 call :write Beta Testers - Mario
 
-choice /c ECBMUS /m "" /n
+:awaitMenu
+choice /c ECBMUS /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -567,13 +568,12 @@ rem you're accept EULA automaticlly.
 
 :updateCheck
 
-echo.
-call :typo Searching for Updates...
-
 if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
-goto menum
+start noupda.exe
+
+goto awaitMenu
 
 :fetchChangelog
 
