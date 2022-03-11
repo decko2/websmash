@@ -1,4 +1,2 @@
-- Small update in EULA
-+ Added uninstallation (update\Unins..)
-
-+ Added beta testers
+- Updated In-Menu 'Updater'
+- Bugs fixes
