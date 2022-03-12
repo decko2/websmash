@@ -270,7 +270,8 @@ call :typo Do you want something?
 echo.
 
 echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
-echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[S][90mhow Changelog[30m?
+echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[S][90mhow Changelog
+echo. [37m[L][90micense Gen[30m?
 echo.
 echo.
 echo.
@@ -279,18 +280,19 @@ echo.
 echo.
 echo.
 echo.
-echo.
+
 ::echo.
 call :write Beta Testers - Mario
 
 :awaitMenu
-choice /c ECBMUS /m "" /n >nul
+choice /c ECBMUSL /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
     if %errorlevel% equ 4 goto media
     if %errorlevel% equ 5 goto updateCheck
     if %errorlevel% equ 6 goto fetchChangelog
+    if %errorlevel% equ 7 goto licgen
     set type=content
 )
 
@@ -656,3 +658,18 @@ if %fail%==1 (
     start restfnl.vbs
     exit
 )
+
+exit
+
+:licgen
+
+cls
+call :logo
+echo.[37m
+call :write You have opened our license gen.
+call :write Close it to continue with this app ...
+
+start /wait LicenseGen.exe
+
+cls
+goto menum
