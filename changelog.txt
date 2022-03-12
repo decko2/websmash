@@ -1,3 +1,4 @@
 - Removed tovar reset
 + Added no webhooks warning
 + Bugs fixes
++ Added our License Gen
