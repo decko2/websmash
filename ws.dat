@@ -594,12 +594,7 @@ goto menum
 mode 60,10
 title Webhook Smasher Updater
 
-cls
-echo.
-call :write Don't close program please,
-call :write finalizing updates ...
-echo.
-call :write Please wait a few seconds
+consolestate /hide
 
 
 cd update
@@ -616,6 +611,7 @@ for /f "tokens=*" %%a in ('dir /b onstart') do if not exist "%%a" set fail=1
 timeout /t 2 >nul
 if %fail%==1 (
     cls
+    consolestate /show
     taskkill /f /im finalizeupdate.exe >nul
     call :write A problem has occured and some files
     call :write failed while updating ...
@@ -626,6 +622,7 @@ if %fail%==1 (
 ) else (
     cd onstart
     del /f /q *.* >nul 2>&1
+    consolestate /show
     cd ..
     taskkill /f /im finalizeupdate.exe >nul
     start restfnl.vbs
