@@ -189,8 +189,6 @@ echo.%key%>key.key
 
 :spammer_main
 
-if not exist webhooks.txt echo.>webhooks.txt
-
 setlocal enabledelayedexpansion
 set req=0
 set count=0
@@ -233,6 +231,35 @@ ping localhost -n 1 >nul && title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| L
 
 
 endlocal
+
+
+if exist "%cd%\webhooks.txt" for /f "tokens=*" %%a in ("%cd%\webhooks.txt") do if %%~za == 0 (
+    cls
+    call :logo
+    echo.
+    call :write You have no added webhooks in webhooks.txt,
+    call :write no requests will be sent.
+    echo.
+    call :write Please add webhooks now.
+    call :write After adding, restart program please!
+    pause >nul
+)
+
+if not exist "%cd%\webhooks.txt" (
+    cls
+    echo.>webhooks.txt
+    call :logo
+    echo.
+    call :write Webhooks file doesn't exists, we
+    call :write created one for you.
+    echo.
+    call :write Add your webhooks to webhooks.txt.
+    call :write After adding, restart program please!
+    pause >nul
+)
+
+
+
 
 :menum
 cls
