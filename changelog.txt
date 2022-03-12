@@ -1,2 +1,3 @@
 - Removed tovar reset
 + Added no webhooks warning
++ Bugs fixes
