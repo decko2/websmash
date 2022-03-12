@@ -23,6 +23,7 @@ cls
 mode 95,25
 cd "%~dp0"
 rem Adding files to path only for this batch file...
+
 set path=%path%;%cd%;%cd%\update
 
 if not exist "update\onstart" md "update\onstart" >nul
