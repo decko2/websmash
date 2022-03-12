@@ -4,3 +4,5 @@
 // What's On-Start Update?
 Some files can not be updated using a normal auto-update, so some files will be downloaded and prepared to the anthoner
 update installation, when you open program. For now, no manual updates!
+
+*tovar reset will be removed and replaced with a uninstall function soon
