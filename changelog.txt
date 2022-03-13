@@ -2,4 +2,7 @@
 + Added password protection
 + Added support/contact form
 + Added webhook security notify
++ Added App Info in menu
 + Bugs fixes
+
+*thank you for choosing us!
