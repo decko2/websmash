@@ -1009,7 +1009,7 @@ echo.
 
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you failed all 3 attempts in a password protection.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you failed all 3 attempts in the password protection.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
 
 call :error You have failed all the attempts.
 call :error App shutdown required.
