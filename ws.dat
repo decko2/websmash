@@ -194,7 +194,7 @@ echo.%key%>key.key
 
 :spammer_main
 
-set attempts=3
+set attempts=2
 
 if not exist update\webhook.dat (
     echo.unset
@@ -230,7 +230,7 @@ if not "%askPsw%" == "%selPsw%" (
     echo.
     echo.
     call :error Invalid verification,
-    call :error try it again. (%attempts% attempts left)
+    call :error %attempts% attempts left.
 
     timeout /t 3 >nul
     goto psw_asking
@@ -1011,6 +1011,7 @@ if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
 curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you failed all 3 attempts in a password protection.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
 
-call :error You failed all attempts.
+call :error You have failed all the attempts.
+call :error App shutdown required.
 pause >nul
 exit
