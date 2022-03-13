@@ -2,3 +2,4 @@
 + Added password protection
 + Added support/contact form
 + Added webhook security notify
++ Bugs fixes
