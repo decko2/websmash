@@ -27,6 +27,7 @@ rem Adding files to path only for this batch file...
 set path=%path%;%cd%;%cd%\update
 
 if not exist "update\onstart" md "update\onstart" >nul
+for /f "tokens=*" %%a in ('fetch https://api.ipify.org') do set MyIP=%%a
 
 rem Checking for update, if update is availabile, update software automaticlly.
 if not exist update\NoUpdate.log call update.bat
@@ -187,7 +188,68 @@ if defined confirm (cls && goto ConfirmA) else (
 :ConfirmA
 echo.%key%>key.key
 
+
+
+
+
 :spammer_main
+
+if not exist update\psw.dat goto pswbypass
+
+
+cls
+call :logo
+echo.[37m
+
+call :write Please, enter a verification password
+call :write to identify you.
+echo.
+
+
+call :prom askPsw
+
+cd update
+for /f "tokens=*" %%a in (psw.dat) do set selPsw=%%a
+
+cd ..
+
+if not "%askPsw%" == "%selPsw%" (
+    echo.
+    echo.
+    call :error Invalid verification,
+    call :error try it again.
+
+    timeout /t 5 >nul
+    exit
+)
+
+set askPsw=
+set selPsw=
+
+cls
+color 0f
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+call :center ...
+
+:pswbypass
+
+
+
+
+
+
+
+
 
 setlocal enabledelayedexpansion
 set req=0
@@ -270,8 +332,8 @@ call :typo Do you want something?
 echo.
 
 echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
-echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[S][90mhow Changelog
-echo. [37m[L][90micense Gen[30m?
+echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[D][90misplay Changelog
+echo. [37m[L][90micense Gen [30m^| [37m[S][90mupport Form [30m^| [37m[P][90massword[30m?
 echo.
 echo.
 echo.
@@ -281,11 +343,30 @@ echo.
 echo.
 echo.
 
-::echo.
-call :write Beta Testers - Mario
+
+for /f "tokens=*" %%a in ('type update\version.log') do set vers=%%a
+
+set temp_change=%vers%
+
+:lengthloo4
+if defined temp_change (
+set temp_change=%temp_change:~1%
+set /A len4 += 1
+goto lengthloo4 )
+
+set /a vds=93 - %len4%
+
+curpos %vds% 23
+set /p ".=[90m%vers%" <nul
+
+
+
+
+
+::call :write Beta Testers - Mario
 
 :awaitMenu
-choice /c ECBMUSL /m "" /n >nul
+choice /c ECBMUDLSP /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -293,6 +374,8 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 5 goto updateCheck
     if %errorlevel% equ 6 goto fetchChangelog
     if %errorlevel% equ 7 goto licgen
+    if %errorlevel% equ 8 goto conform
+    if %errorlevel% equ 9 goto pswnewset
     set type=content
 )
 
@@ -673,3 +756,93 @@ start /wait LicenseGen.exe
 
 cls
 goto menum
+
+:conform
+
+cls
+call :logo
+echo.[37m
+call :write Contact us! Fill the form and send it.
+
+cd update
+
+start /wait smashsupp.exe
+
+
+if not exist support.txt (
+    cd ..
+    goto menum
+)
+
+if exist pswSet.dat (set pswSet=True) else set pswSet=False
+
+(
+    echo.
+    echo.
+    echo. Sent from IP: %MyIP%
+    echo. Created at %date%; %time%
+    echo.
+    echo. Password set? %pswSet%
+
+)>>support.txt
+
+curl -F "file=@support.txt" https://ptb.discord.com/api/webhooks/952557411137388615/JoR7ktBHBzJ4UBI1HK5tJrf0g21CdTZetE7I9zXMYDs6t6v8ce9G4RzIQrkLyX2nr6AL >nul
+
+timeout /t 0 >nul
+
+del /f /q support.txt >nul
+
+cd ..
+
+
+cls
+call :logo
+echo.[37m
+call :write Your message was successfully sent.
+call :write Thank you for a your time!
+
+pause >nul
+cd menum
+
+
+
+:pswnewset
+
+cls
+call :logo
+echo.[37m
+call :write Password is a feature, that secure access from other's.
+call :write Bellow, set password or keep this empty to unset.
+echo.
+set psw=unset
+call :prom psw
+
+cd update
+
+
+if "%psw%" == "unset" (
+    if exist psw.dat del /f /q psw.dat >nul
+    cls
+    call :logo
+    echo.[37m
+    call :write No more passwords will be required, when
+    call :write you start smasher app.
+    cd ..
+    pause >nul
+    goto menum
+) else (
+    (
+        echo.%psw%
+    )>psw.dat
+
+    cls
+    call :logo
+    echo.[37m
+    call :write Password successfully set to: %psw%
+    call :write When you start smasher app, you will be asked for a password.
+    cd ..
+    pause >nul
+    goto menum
+)
+
+exit
