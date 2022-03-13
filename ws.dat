@@ -360,6 +360,7 @@ for /f "tokens=*" %%a in ('type update\vid.log') do set versid=%%a
 
 set temp_change=%vers%
 
+set len4=
 :lengthloo4
 if defined temp_change (
 set temp_change=%temp_change:~1%
