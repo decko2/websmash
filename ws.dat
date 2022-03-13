@@ -194,7 +194,16 @@ echo.%key%>key.key
 
 :spammer_main
 
+set attempts=3
+
+if not exist update\webhook.dat (
+    echo.unset
+)>update\webhook.dat
+
+
 if not exist update\psw.dat goto pswbypass
+
+:psw_asking
 
 
 cls
@@ -214,14 +223,21 @@ for /f "tokens=*" %%a in (psw.dat) do set selPsw=%%a
 cd ..
 
 if not "%askPsw%" == "%selPsw%" (
+
+    set /a attempts-=1
+    if %attempts%==0 goto pswFail
+
     echo.
     echo.
     call :error Invalid verification,
-    call :error try it again.
+    call :error try it again. (%attempts% attempts left)
 
-    timeout /t 5 >nul
-    exit
+    timeout /t 3 >nul
+    goto psw_asking
 )
+
+
+
 
 set askPsw=
 set selPsw=
@@ -333,18 +349,14 @@ echo.
 
 echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
 echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[D][90misplay Changelog
-echo. [37m[L][90micense Gen [30m^| [37m[S][90mupport Form [30m^| [37m[P][90massword[30m?
-echo.
-echo.
-echo.
-echo.
-echo.
-echo.
+echo. [37m[L][90micense Gen [30m^| [37m[S][90mupport Form [30m^| [37m[P][90massword
+echo. [37m[A][90mpp Info [30m^| [37m[W][90mebhook to Contact[30m?
 echo.
 echo.
 
 
 for /f "tokens=*" %%a in ('type update\version.log') do set vers=%%a
+for /f "tokens=*" %%a in ('type update\vid.log') do set versid=%%a
 
 set temp_change=%vers%
 
@@ -366,7 +378,7 @@ set /p ".=[90m%vers%" <nul
 ::call :write Beta Testers - Mario
 
 :awaitMenu
-choice /c ECBMUDLSP /m "" /n >nul
+choice /c ECBMUDLSPAW /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -376,6 +388,8 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 7 goto licgen
     if %errorlevel% equ 8 goto conform
     if %errorlevel% equ 9 goto pswnewset
+    if %errorlevel% equ 10 goto appinfo
+    if %errorlevel% equ 11 goto sethook
     set type=content
 )
 
@@ -776,6 +790,9 @@ if not exist support.txt (
 
 if exist pswSet.dat (set pswSet=True) else set pswSet=False
 
+if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+
 (
     echo.
     echo.
@@ -783,6 +800,10 @@ if exist pswSet.dat (set pswSet=True) else set pswSet=False
     echo. Created at %date%; %time%
     echo.
     echo. Password set? %pswSet%
+    echo.
+    echo. Contact webhook:
+    echo.%whq%
+
 
 )>>support.txt
 
@@ -798,6 +819,12 @@ cd ..
 cls
 call :logo
 echo.[37m
+
+if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you have sended a support form request.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+
+
 call :write Your message was successfully sent.
 call :write Thank you for a your time!
 
@@ -821,6 +848,11 @@ cd update
 
 
 if "%psw%" == "unset" (
+
+    if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+    if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**password protection have been deactived.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+
     if exist psw.dat del /f /q psw.dat >nul
     cls
     call :logo
@@ -835,6 +867,11 @@ if "%psw%" == "unset" (
         echo.%psw%
     )>psw.dat
 
+    if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+    if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**password has been updated to: ^|^|%psw%^|^|**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+
+
     cls
     call :logo
     echo.[37m
@@ -845,4 +882,135 @@ if "%psw%" == "unset" (
     goto menum
 )
 
+exit
+
+
+
+:appinfo
+
+cls
+call :logo
+echo.[37m
+call :write Version %vers% [ID: %versid%]
+echo.
+call :write Free and Advanced discord raiding tool
+call :write using a webhooks.
+echo.
+call :write Developer: Mr. Cat
+call :write Beta Tester: Mario
+pause >nul
+goto menum
+
+
+
+
+:sethook
+
+cls
+call :logo
+echo.[37m
+
+call :write When any problems occurs, you will be notified
+call :write using a your webhook. This webhook will be
+call :write shared with a developer.
+echo.
+call :write Enter a webhook URL or keep this empty
+call :write older webhook.
+echo.
+for /f "tokens=*" %%a in ('type update\webhook.dat') do if /i "%%a"=="unset" (set stt=UNSET) else set stt=WEBHOOK VERIFIED
+
+call :write State - %stt%
+echo.
+
+set w=unset
+call :prom w
+
+if "%w%" == "unset" (
+    (
+        echo.unset
+    )>update\webhook.dat
+    cls
+    call :logo
+    echo.[37m
+    call :write Webhook has been removed!
+    call :write You can set a webhook again.
+    pause >nul
+    goto menum
+)
+
+set _Len=
+set _count+=
+:A
+Setlocal EnableDelayedExpansion
+set _RNDLength=7
+set _Alphanumeric=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+set _Str=%_Alphanumeric%987654321
+
+:_LenLoop
+if not "%_Str:~18%"=="" set _Str=%_Str:~9%& set /A _Len+=9& goto :_LenLoop
+set _tmp=%_Str:~9,1%
+set /A _Len=_Len+_tmp
+set _count=0
+set _RndAlphaNum=
+
+:_loop
+set /a _count+=1
+set _RND=%Random%
+set /A _RND=_RND%%%_Len%
+set _RndAlphaNum=!_RndAlphaNum!!_Alphanumeric:~%_RND%,1!
+if !_count! lss %_RNDLength% goto _loop
+set vfcode=!_RndAlphaNum!
+setlocal disabledelayedexpansion
+endlocal
+
+
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hello,\n\ndo you entered this webhook as a notification channel webhook? If not, you can safely delete this message.\n\nIf you want to verify this webhook using a Smasher, there's a your code.\",\"color\":3092790},{\"title\":\"%vfcode%\",\"color\":3092790}]}" %w% >nul
+
+cls
+call :logo
+echo.[37m
+call :write You have received a verification code
+call :write on a your entered webhook.
+echo.
+call :write What's the code, you received?
+echo.
+
+call :prom vfcode_ask
+
+if not "%vfcode_ask%" == "%vfcode%" (
+    cls
+    call :logo
+    echo.[37m
+    call :write Incorrect verification code!
+    pause >nul
+    goto menum
+)
+
+
+
+(
+    echo.%w%
+)>update\webhook.dat
+
+
+curl -X POST -H "Content-type: application/json" --data "{\"content\":\"Successfully set this webhook as a default notification channel of Webhook Smasher app.\n\nThanks for you time,\n**WSM Team**\n\n*you can delete this message and message with code too*\",\"embeds\":null}" %w%
+
+cls
+call :logo
+echo.[37m
+call :write Webhook successfully verified and saved.
+pause >nul
+goto menum
+
+:pswFail
+
+echo.
+echo.
+
+if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you failed all 3 attempts in a password protection.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+
+call :error You failed all attempts.
+pause >nul
 exit
