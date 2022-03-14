@@ -1,8 +1,3 @@
-+ App menu has now a version
-+ Added password protection
-+ Added support/contact form
-+ Added webhook security notify
-+ Added App Info in menu
-+ Bugs fixes
-
-*thank you for choosing us!
++ Restore Tool improvements
++ Graphics improvements
++ Bug fixes
