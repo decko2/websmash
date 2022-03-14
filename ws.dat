@@ -34,7 +34,6 @@ if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
 
-
 for /f %%i in ('dir /b /a "update\onstart"') do goto finalupd
 
 color 0f
@@ -352,7 +351,7 @@ call :typo Do you want something?
 echo.
 
 echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
-echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Check [30m^| [37m[D][90misplay Changelog
+echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Settings [30m^| [37m[D][90misplay Changelog
 echo. [37m[L][90micense Gen [30m^| [37m[S][90mupport Form [30m^| [37m[P][90massword
 echo. [37m[A][90mpp Info [30m^| [37m[W][90mebhook to Contact[30m?
 echo.
@@ -697,12 +696,53 @@ rem you're accept EULA automaticlly.
 
 :updateCheck
 
-call update.bat
-if %errorlevel%==1 exit
+cls
+call :ico
+echo.
+call :write What do you want to do?
+echo.
+call :write [37m[U][90mpdate Check
+echo.
+call :write [37m[E][90mnable Updates
+call :write [37m[D][90misable Updates
+echo.
 
-start noupda.exe
+if exist update\NoUpdate.log (
+    call :write Updates are at this moment disabled.
+) else call :write Updates are enabled.
 
-goto awaitMenu
+echo.
+choice /C UED /M "" /N >nul
+
+if %errorlevel% == 1 (
+    call update.bat
+    if %errorlevel%==1 exit
+    start noupda.exe
+    goto menum
+) else if %errorlevel% == 2 (
+    if exist update\NoUpdate.log del /f /q update\NoUpdate.log >nul
+    cls
+    call :ico
+    echo.
+    call :write Updates enabled.
+    pause >nul
+    goto menum
+) else (
+    if not exist update\NoUpdate.log echo. >update\NoUpdate.log >nul
+    cls
+    call :ico
+    echo.
+    call :write Updates disabled.
+    pause >nul
+    goto menum
+)
+
+goto menum
+
+
+
+
+
 
 :fetchChangelog
 
