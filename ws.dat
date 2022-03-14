@@ -34,7 +34,6 @@ if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
 
-
 for /f %%i in ('dir /b /a "update\onstart"') do goto finalupd
 
 color 0f
@@ -79,6 +78,9 @@ if /i %eula%==false (
     pause >nul
     echo.true>eula.eula
 )
+
+
+
 
 mode 95,25
 cls
@@ -694,8 +696,8 @@ rem you're accept EULA automaticlly.
 
 :updateCheck
 
-if not exist update\NoUpdate.log call update.bat
-if not exist update\NoUpdate.log if %errorlevel%==1 exit
+call update.bat
+if %errorlevel%==1 exit
 
 start noupda.exe
 
@@ -824,7 +826,8 @@ echo.[37m
 
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you have sended a support form request.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+set qwmsg=Your support message was sent.
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
 
 
 call :write Your message was successfully sent.
@@ -853,7 +856,8 @@ if "%psw%" == "unset" (
 
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**password protection have been deactived.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+    set qwmsg=Password protection has been disabled.
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
 
     if exist psw.dat del /f /q psw.dat >nul
     cls
@@ -871,7 +875,8 @@ if "%psw%" == "unset" (
 
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**password has been updated to: ^|^|%psw%^|^|**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+    set qwmsg=Password updated to: `%psw%`
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
 
 
     cls
@@ -900,6 +905,7 @@ call :write using a webhooks.
 echo.
 call :write Developer: Mr. Cat
 call :write Beta Tester: Mario
+echo.
 pause >nul
 goto menum
 
@@ -995,7 +1001,10 @@ if not "%vfcode_ask%" == "%vfcode%" (
 )>update\webhook.dat
 
 
-curl -X POST -H "Content-type: application/json" --data "{\"content\":\"Successfully set this webhook as a default notification channel of Webhook Smasher app.\n\nThanks for you time,\n**WSM Team**\n\n*you can delete this message and message with code too*\",\"embeds\":null}" %w%
+if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+set qwmsg=Your contact webhook has been successfully set!
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
 
 cls
 call :logo
@@ -1011,7 +1020,8 @@ echo.
 
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"Hi,\n\n**you failed all 3 attempts in the password protection.**\n\nThanks for your time,\nWSM Team\",\"color\":3092790}]}" %whq% >nul
+set qwmsg=All password attempts failed!
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
 
 call :error You have failed all the attempts.
 call :error App shutdown required.
