@@ -34,6 +34,7 @@ if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
 
+
 for /f %%i in ('dir /b /a "update\onstart"') do goto finalupd
 
 color 0f
