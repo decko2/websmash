@@ -699,62 +699,81 @@ rem Webhook Smasher - Discord Webhook MultiSpammer
 rem You don't have allowed to modify this software, using program,
 rem you're accept EULA automaticlly.
 
+
+
 :updateCheck
 
+
 cls
+
 call :logo
+
 echo.
 call :write What do you want to do?
 
 echo.
+
 call :write [37m[U][90mpdate Check
 
 echo.
 
 call :write [37m[E][90mnable Updates
+
 call :write [37m[D][90misable Updates
 
 echo.
 
-
-if exist "update\NoUpdate.log" (
-
-    call :write Updates are at this moment disabled.
-
-) else (
-    call :write Updates are enabled.
-)
-
-echo.
 choice /C UED /M "" /N >nul
 
-if %errorlevel% == 1 (
-    call update.bat
-    if %errorlevel%==1 exit
-    start noupda.exe
-    goto menum
-) else if %errorlevel% == 2 (
-    if exist update\NoUpdate.log del /f /q update\NoUpdate.log >nul
-    cls
-    call :logo
-    echo.
-    call :write Updates enabled.
+if %errorlevel%==1 goto checkupd
 
-    pause >nul
+goto enable.upd
 
-    goto menum
 
-) else (
-    if not exist update\NoUpdate.log echo. >update\NoUpdate.log >nul
-    cls
-    call :logo
-    echo.
+:checkupd
 
-    call :write Updates disabled.
-    pause >nul
+call update.bat
 
-    goto menum
-)
+if %errorlevel%==1 exit
+
+start noupda.exe
+
+goto menum
+
+
+
+:enable.upd
+
+if %errorlevel%==3 goto disable.upd
+
+del /f /q update\NoUpdate.log >nul
+
+cls
+
+call :logo
+
+echo.
+
+call :write Updates enabled.
+
+pause >nul
+
+goto menum
+
+
+:disable.upd
+
+echo.>update\NoUpdate.log >nul
+
+cls
+
+call :logo
+
+echo.
+
+call :write Updates disabled.
+
+pause >nul
 
 goto menum
 
