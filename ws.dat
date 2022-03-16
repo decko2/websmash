@@ -911,7 +911,7 @@ echo.[37m
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
 set wqmsg=Your support message was sent.
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
 
 call :write Your message was successfully sent.
@@ -941,7 +941,7 @@ if "%psw%" == "unset" (
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
     set wqmsg=Password protection has been disabled.
-    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
     if exist psw.dat del /f /q psw.dat >nul
     cls
@@ -960,7 +960,7 @@ if "%psw%" == "unset" (
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
     set wqmsg=Password updated to: `%psw%`
-    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
 
     cls
@@ -1088,7 +1088,7 @@ if not "%vfcode_ask%" == "%vfcode%" (
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
 set wqmsg=Your contact webhook has been successfully set!
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
 cls
 call :logo
@@ -1105,7 +1105,7 @@ echo.
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
 set wqmsg=All password attempts failed!
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
 call :error You have failed all the attempts.
 call :error App shutdown required.
@@ -1156,7 +1156,7 @@ if exist invpsw.tmp (
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
     set wqmsg=Invalid password attempted in the screen locker.
-    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 )
 
 goto lockloop
