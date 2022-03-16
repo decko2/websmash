@@ -1106,8 +1106,13 @@ exit
 cls
 call :logo
 echo.[37m
-call :write Please, enter a unlocking password.
+call :write Please, enter a unlocking password, or keep this empty to exit.
+echo.
+set h=%random%---%random%
+set scrpassword=%h%
 call :prom scrpassword
+
+if "%scrpassword%" == "%h%" goto menum
 
 cls
 cd update
