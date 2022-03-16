@@ -355,8 +355,8 @@ echo.
 
 echo. [37m[E][90mmbed [30m^| [37m[B][90mrutal Chat lagger [30m^| [37m[M][90media Spam
 echo. [37m[C][90montent only [30m^| [37m[U][90mpdate Settings [30m^| [37m[D][90misplay Changelog
-echo. [37m[L][90micense Gen [30m^| [37m[S][90mupport Form [30m^| [37m[P][90massword
-echo. [37m[A][90mpp Info [30m^| [37m[W][90mebhook to Contact[30m?
+echo. [37m[L][90micense Gen [30m^| [37m[H][90melp Form [30m^| [37m[P][90massword
+echo. [37m[A][90mpp Info [30m^| [37m[W][90mebhook to Contact [30m^| [37m[S][90mcreen Locker[30m?
 echo.
 echo.
 
@@ -385,7 +385,7 @@ set /p ".=[90m%vers%" <nul
 ::call :write Beta Testers - Mario
 
 :awaitMenu
-choice /c ECBMUDLSPAW /m "" /n >nul
+choice /c ECBMUDLHPAWS /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -397,6 +397,7 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 9 goto pswnewset
     if %errorlevel% equ 10 goto appinfo
     if %errorlevel% equ 11 goto sethook
+    if %errorlevel% equ 12 goto scrlocker
     set type=content
 )
 
@@ -1110,3 +1111,68 @@ call :error You have failed all the attempts.
 call :error App shutdown required.
 pause >nul
 exit
+
+:scrlocker
+
+cls
+call :logo
+echo.[37m
+call :write Please, enter a unlocking password.
+call :prom scrpassword
+
+cls
+cd update
+
+del /f /q unlockpc.tmp >nul
+del /f /q invpsw.tmp >nul 
+
+cls
+
+(
+    set /p ".=%scrpassword%" <nul
+)>lockpsw.dat
+
+taskkill /f /im explorer.exe >nul
+
+timeout /nobreak /t 1 >nul
+start screen_locker_smash.exe
+
+
+:lockloop
+
+timeout /t 1 >nul
+
+if exist unlockpc.tmp (
+    del /f /q unlockpc.tmp >nul
+    timeout /t 3 >nul
+    start explorer.exe
+    timeout /t 1 >nul
+    taskkill /f /im screen_locker_smash.exe >nul
+    goto endlooplock
+) 
+
+if exist invpsw.tmp (
+    del /f /q invpsw.tmp >nul
+    if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+    if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+    set wqmsg=Invalid password attempted in the screen locker.
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul
+)
+
+goto lockloop
+
+
+:endlooplock
+
+del /f /q lockpsw.dat
+
+cd ..
+
+cls
+call :logo
+echo.[37m
+call :write Computer successfully unlocked.
+
+pause >nul
+
+goto menum
