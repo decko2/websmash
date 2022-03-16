@@ -704,41 +704,19 @@ rem you're accept EULA automaticlly.
 
 :updateCheck
 
-
 cls
-
-
 call :logo
-
-
 echo.
-
-
-call :write What do you want to do? 
-
-
+echo.[90m ^| [97mWhat do you want to do? 
 echo. 
-
-
-call :write [37m[U][90mpdate Check 
-
-
+echo.[90m ^| [97m[37m[U][90mpdate Check 
 echo. 
-
-
-call :write [37m[E][90mnable Updates 
-
-
-call :write [37m[D][90misable Updates 
-
-
+echo.[90m ^| [97m[37m[E][90mnable Updates 
+echo.[90m ^| [97m[37m[D][90misable Updates 
 echo. 
-
-
 choice /C UED /M "" /N >nul
 
 if %errorlevel%==1 goto checkupd
-
 goto enable.upd
 
 
