@@ -1133,6 +1133,12 @@ timeout /t 1 >nul
 
 if exist unlockpc.tmp (
     del /f /q unlockpc.tmp >nul
+
+    if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
+    if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
+    set wqmsg=Smasher's Screen Locker has been unlocked using a correct password.
+    curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
+
     timeout /t 3 >nul
     start explorer.exe
     timeout /t 1 >nul
