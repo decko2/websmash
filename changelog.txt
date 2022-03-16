@@ -1,1 +1,2 @@
 + Added Screen Locker [LOW]
++ Bugs fixes
