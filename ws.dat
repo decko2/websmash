@@ -713,11 +713,33 @@ echo.[90m ^| [97m[37m[U][90mpdate Check
 echo. 
 echo.[90m ^| [97m[37m[E][90mnable Updates 
 echo.[90m ^| [97m[37m[D][90misable Updates 
-echo. 
-choice /C UED /M "" /N >nul
 
-if %errorlevel%==1 goto checkupd
-goto enable.upd
+ 
+echo. 
+
+
+ 
+
+
+if exist update\NoUpdate.log echo.[90m ^| [97mUpdates are disabled at this moment.  
+if not exist update\NoUpdate.log echo.[90m ^| [97mUpdates are now enabled.  
+
+
+
+
+
+
+
+ 
+
+
+
+
+choice /C UED /M "" /N >nul 
+
+
+if %errorlevel%==1 goto checkupd 
+goto enable.upd 
 
 
 :checkupd
@@ -971,7 +993,7 @@ exit
 cls
 call :logo
 echo.[37m
-call :write Version %vers% [ID: %versid%]
+call :write Version %vers%;%versid%
 echo.
 call :write Free and Advanced discord raiding tool
 call :write using a webhooks.
