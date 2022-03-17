@@ -1,2 +1,2 @@
-+ Added Screen Locker [LOW]
++ Added Fake Error Message Maker
 + Bugs fixes
