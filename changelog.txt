@@ -1,3 +1,5 @@
 + Bug Fix in License Gen
 + Restore Tool improvements
 + Restore Tool Creation Method changed
++ Better size of the smasher
++ Updated 7z to latest standalone version
