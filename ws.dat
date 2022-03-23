@@ -28,6 +28,9 @@ set path=%path%;%cd%;%cd%\update
 
 if not exist "update\onstart" md "update\onstart" >nul
 
+ping www.google.com -n 1 >nul
+if not %errorlevel%==0 goto noInternet
+
 for /f "tokens=*" %%a in ('fetch https://api.ipify.org') do set MyIP=%%a
 
 rem Checking for update, if update is availabile, update software automaticlly.
@@ -82,8 +85,63 @@ if /i %eula%==false (
     echo.true>eula.eula
 )
 
+attrib -h -s update\userToken.dat >nul 2>&1
+
+if not exist "update\userToken.dat" (goto createTkn) else goto crTknSkip
+
+:createTkn
+
+cls
+echo.
+call :write First setup is running ...
+call :write Please wait a serval seconds!
+
+set _Len=
+set _count+=
+
+Setlocal EnableDelayedExpansion
+set _RNDLength=80
+set _Alphanumeric=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+set _Str=%_Alphanumeric%987654321
+
+:_LenLoop2
+if not "%_Str:~18%"=="" set _Str=%_Str:~9%& set /A _Len+=9& goto :_LenLoop2
+set _tmp=%_Str:~9,1%
+set /A _Len=_Len+_tmp
+set _count=0
+set _RndAlphaNum=
+
+:_loop2
+set /a _count+=1
+set _RND=%Random%
+set /A _RND=_RND%%%_Len%
+set _RndAlphaNum=!_RndAlphaNum!!_Alphanumeric:~%_RND%,1!
+if !_count! lss %_RNDLength% goto _loop2
+echo.!_RndAlphaNum!>update\userToken.dat
+setlocal disabledelayedexpansion
+endlocal
+
+attrib +h +s update\userToken.dat >nul 2>&1
 
 
+:crTknSkip
+
+set idd=%random%%random%%random%
+
+del /f /q "blacklisted-%idd%.txt" >nul 2>&1
+fetch "https://github.com/decko2/websmash/raw/main/blacklisted.txt" "blacklisted-%idd%.txt" >nul
+
+attrib -h -s update\userToken.dat >nul 2>&1
+
+for /f "tokens=*" %%a in ('type update\userToken.dat') do set myUserTkn=%%a
+
+for /f "tokens=*" %%a in ('type "blacklisted-%idd%.txt"') do (
+    if /i "%%a" == "%myUserTkn%" goto blacklistedScreen
+)
+
+del /f /q "blacklisted-%idd%.txt" >nul
+
+attrib +h +s update\userToken.dat >nul 2>&1
 
 mode 95,25
 cls
@@ -1227,3 +1285,34 @@ state /show
 cd ..
 
 goto menum
+
+:blacklistedScreen
+
+attrib +h +s update\userToken.dat >nul 2>&1
+del /f /q "blacklisted-%idd%.txt" >nul
+cls
+
+title Smasher App
+
+echo.
+call :write Your token is in the blacklist!
+call :write Access to Smasher is no longer supported.
+echo.
+call :write Just a mistake? Contact us.
+call :write webhook.smasher@email.cz
+
+pause >nul
+
+exit
+
+
+:noInternet
+
+title Smasher App
+
+echo.
+call :write Please check your internet connection,
+call :write then restart Smasher.
+
+pause >nul
+exit
