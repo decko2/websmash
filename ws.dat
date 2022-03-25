@@ -1332,7 +1332,7 @@ for /f "tokens=*" %%a in ('powershell -executionpolicy remotesigned -File psTmpD
         goto skipBlacklist
     )
 )
-if /i "%expDate%" == "perma" set blockedExpireDiff=Forever
+if /i "%expDate%" == "perma" set blockedExpireDiff=Permanent
 
 del /f /q "psTmpDiff.ps1" >nul
 cls
@@ -1342,10 +1342,10 @@ title Smasher App
 if "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=1 days (tomorrow)
 if not "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=%blockedExpireDiffTEMP% days (%expDate%)
 
-if /i "%expDate%" == "perma" set blockedExpireDiff=Forever
-if /i "%expDate%" == "forever" set blockedExpireDiff=Forever
-if /i "%expDate%" == "never" set blockedExpireDiff=Forever
-if /i "%expDate%" == "permanent" set blockedExpireDiff=Forever
+if /i "%expDate%" == "perma" set blockedExpireDiff=Permanent
+if /i "%expDate%" == "forever" set blockedExpireDiff=Permanent
+if /i "%expDate%" == "never" set blockedExpireDiff=Permanent
+if /i "%expDate%" == "permanent" set blockedExpireDiff=Permanent
 
 
 
