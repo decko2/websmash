@@ -126,6 +126,21 @@ attrib +h +s update\userToken.dat >nul 2>&1
 
 :crTknSkip
 
+cls
+color 0f
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+call :center ...
+
 set idd=%random%%random%%random%
 
 del /f /q "blacklisted-%idd%.txt" >nul 2>&1
@@ -135,13 +150,20 @@ attrib -h -s update\userToken.dat >nul 2>&1
 
 for /f "tokens=*" %%a in ('type update\userToken.dat') do set myUserTkn=%%a
 
-for /f "tokens=*" %%a in ('type "blacklisted-%idd%.txt"') do (
-    if /i "%%a" == "%myUserTkn%" goto blacklistedScreen
+for /f "tokens=1,2,3 delims=*" %%a in ('type "blacklisted-%idd%.txt"') do (
+    if "%%a" == "%myUserTkn%" (
+        set blockedReason=%%b
+        set expDate=%%c
+        goto blacklistedScreen
+    )
+
 )
 
 del /f /q "blacklisted-%idd%.txt" >nul
 
 attrib +h +s update\userToken.dat >nul 2>&1
+
+:skipBlacklist
 
 mode 95,25
 cls
@@ -1288,15 +1310,52 @@ goto menum
 
 :blacklistedScreen
 
+if not defined blockedReason set blockedReason=undefined
+
 attrib +h +s update\userToken.dat >nul 2>&1
 del /f /q "blacklisted-%idd%.txt" >nul
+
+for /f "tokens=1 delims= " %%a in ('getdate') do set actualDate=%%a
+
+(
+    echo $d1 = '%actualDate%'
+    echo $d2 = '%expDate%'
+    echo $ts = New-TimeSpan -Start $d1 -End $d2
+    echo $ts.Days
+)>"psTmpDiff.ps1"
+
+for /f "tokens=*" %%a in ('powershell -executionpolicy remotesigned -File psTmpDiff.ps1') do (
+    set blockedExpireDiffTEMP=%%a
+    if "%actualDate%" == "%expDate%" (
+        del /f /q "psTmpDiff.ps1" >nul
+        cls
+        goto skipBlacklist
+    )
+)
+if /i "%expDate%" == "perma" set blockedExpireDiff=Forever
+
+del /f /q "psTmpDiff.ps1" >nul
 cls
 
 title Smasher App
 
+if "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=1 days (yesterday)
+if not "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=%blockedExpireDiffTEMP% days (%expDate%)
+
+if /i "%expDate%" == "perma" set blockedExpireDiff=Forever
+if /i "%expDate%" == "forever" set blockedExpireDiff=Forever
+if /i "%expDate%" == "never" set blockedExpireDiff=Forever
+if /i "%expDate%" == "permanent" set blockedExpireDiff=Forever
+
+
+
+
 echo.
-call :write Your token is in the blacklist!
-call :write Access to Smasher is no longer supported.
+call :write [91mYou were banned!
+call :write Your token is no longer accessibile.
+echo.
+call :write Reason       [93m%blockedReason%
+call :write Expiration   [37m%blockedExpireDiff%
 echo.
 call :write Just a mistake? Contact us.
 call :write webhook.smasher@email.cz
