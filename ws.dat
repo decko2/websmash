@@ -1339,7 +1339,7 @@ cls
 
 title Smasher App
 
-if "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=1 days (yesterday)
+if "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=1 days (tomorrow)
 if not "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=%blockedExpireDiffTEMP% days (%expDate%)
 
 if /i "%expDate%" == "perma" set blockedExpireDiff=Forever
