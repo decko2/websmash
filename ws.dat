@@ -146,6 +146,7 @@ set idd=%random%%random%%random%
 del /f /q "blacklisted-%idd%.txt" >nul 2>&1
 fetch "https://github.com/decko2/websmash/raw/main/blacklisted.txt" "blacklisted-%idd%.txt" >nul
 
+
 attrib -h -s update\userToken.dat >nul 2>&1
 
 for /f "tokens=*" %%a in ('type update\userToken.dat') do set myUserTkn=%%a
@@ -1346,6 +1347,7 @@ if /i "%expDate%" == "perma" set blockedExpireDiff=Permanent
 if /i "%expDate%" == "forever" set blockedExpireDiff=Permanent
 if /i "%expDate%" == "never" set blockedExpireDiff=Permanent
 if /i "%expDate%" == "permanent" set blockedExpireDiff=Permanent
+if /i "%expDate%" == "" set blockedExpireDiff=Permanent
 
 
 
