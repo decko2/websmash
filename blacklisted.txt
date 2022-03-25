@@ -1,6 +1,3 @@
-hzfhfhnf*fjnfnhgfnhx*fgnx
+[Smasher Blacklist]
+Format per a one line:  user_token*reason*[yyyy-MM-dd]/permanent
 
-G6etXePifzJY7gb8KYmmjQkYaLKdDAPo96dY4vWAHds9Z9teOn6MFsOBHtOy*Test Reason*permanent
-uzfzkmzfuhjm*hzdfjnt*dztzt
-ugghmhg
-mg*jgjng*gnhgcnh
