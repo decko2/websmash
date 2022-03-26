@@ -823,7 +823,7 @@ choice /C UEDI /M "" /N >nul
 
 if %errorlevel%==1 goto checkupd 
 if %errorlevel%==4 (
-    echo.ready>version.log
+    echo.ready>update\version.log
     call update.bat
     exit
 )
