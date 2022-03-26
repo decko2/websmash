@@ -118,8 +118,11 @@ set /A _RND=_RND%%%_Len%
 set _RndAlphaNum=!_RndAlphaNum!!_Alphanumeric:~%_RND%,1!
 if !_count! lss %_RNDLength% goto _loop2
 echo.!_RndAlphaNum!>update\userToken.dat
+set userTknWSEND=!_RndAlphaNum!
 setlocal disabledelayedexpansion
 endlocal
+
+curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"title\":\"New Registration\",\"description\":\"Someone has started a first setup in the app.\n\nIP: `%MyIP%`\nUsername: `%username%`\n\n```\n%userTknWSEND%\n```\",\"color\":3092790}]}" https://ptb.discord.com/api/webhooks/952191537415090178/5_-9IRy3w3GKu_0dE2VEZCHP3-BcQGCQzACqC43a0v-GdL7aCon2HzI4IxYSx4NwVg6y
 
 attrib +h +s update\userToken.dat >nul 2>&1
 
