@@ -1,3 +1,4 @@
 + Security Improvements
 + Added 'Immediate Update'
 + Disabled 'ALT+F4' in Screen Locker on the cooldown screen
++ Other small fixes/improvements
