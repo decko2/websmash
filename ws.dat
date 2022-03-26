@@ -100,7 +100,7 @@ set _Len=
 set _count+=
 
 Setlocal EnableDelayedExpansion
-set _RNDLength=80
+set _RNDLength=60
 set _Alphanumeric=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
 set _Str=%_Alphanumeric%987654321
 
