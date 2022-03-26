@@ -167,7 +167,24 @@ attrib +h +s update\userToken.dat >nul 2>&1
 :skipBlacklist
 
 call printProgress.bat 95 0 F 0
+timeout /nobreak /t 0 >nul
+timeout /nobreak /t 0 >nul
+timeout /nobreak /t 0 >nul
 
+cls
+color 0f
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+call :center ...
 
 set path=%path%;%cd%
 ping localhost -n 1 >nul && title W
