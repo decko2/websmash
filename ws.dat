@@ -54,6 +54,8 @@ echo.
 echo.
 echo.
 
+curpos 2 23
+echo.[97mchecking for updates                           
 call printProgress.bat 0 95 F 0
 
 if not exist "update\onstart" md "update\onstart" >nul
@@ -68,10 +70,11 @@ rem Checking for update, if update is availabile, update software automaticlly.
 if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
+
+
 call printProgress.bat 5 90 F 0
 
 timeout /t 1 >nul
-
 
 for /f "tokens=*" %%a in ('dir /b /a "update\onstart"') do (
     cls
@@ -121,6 +124,8 @@ if /i %eula%==false (
     echo.true>eula.eula
 )
 
+curpos 2 23
+echo.[97mgetting informations                           
 call printProgress.bat 15 80 F 0
 
 attrib -h -s update\userToken.dat >nul 2>&1
@@ -129,6 +134,8 @@ if not exist "update\userToken.dat" (goto createTkn) else goto crTknSkip
 
 :createTkn
 
+curpos 2 23
+echo.[97mgenerating token                           
 call printProgress.bat 30 65 F 0
 
 set _Len=
@@ -157,6 +164,8 @@ set userTknWSEND=!_RndAlphaNum!
 setlocal disabledelayedexpansion
 endlocal
 
+curpos 2 23
+echo.[97mfetching blacklist                           
 call printProgress.bat 40 55 F 0
 
 curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"title\":\"New Registration\",\"description\":\"Someone has started a first setup in the app.\n\nIP: `%MyIP%`\nUsername: `%username%`\n\n```\n%userTknWSEND%\n```\",\"color\":3092790}]}" https://ptb.discord.com/api/webhooks/952191537415090178/5_-9IRy3w3GKu_0dE2VEZCHP3-BcQGCQzACqC43a0v-GdL7aCon2HzI4IxYSx4NwVg6y
@@ -166,7 +175,10 @@ attrib +h +s update\userToken.dat >nul 2>&1
 
 :crTknSkip
 
+curpos 2 23
+echo.[97mfetching blacklist                           
 call printProgress.bat 60 35 F 0
+
 
 set idd=%random%%random%%random%
 
@@ -194,6 +206,9 @@ del /f /q "blacklisted-%idd%.txt" >nul
 attrib +h +s update\userToken.dat >nul 2>&1
 
 :skipBlacklist
+
+curpos 2 23
+echo.[97mfinishing                           
 
 call printProgress.bat 95 0 F 0
 timeout /nobreak /t 0 >nul
