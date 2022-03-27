@@ -26,8 +26,35 @@ rem Adding files to path only for this batch file...
 
 set path=%path%;%cd%;%cd%\update
 
-call printProgress.bat 0 95 F 0
 cursorsize 0
+title Webhook Smasher
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+call :center Webhook Smasher
+set /p ".=[37m" <nul
+call :center loading important settings
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+
+call printProgress.bat 0 95 F 0
 
 if not exist "update\onstart" md "update\onstart" >nul
 
@@ -42,12 +69,14 @@ if not exist update\NoUpdate.log call update.bat
 if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
 call printProgress.bat 5 90 F 0
+
 timeout /t 1 >nul
 
 
-for /f "tokens=*" %%a in ('dir /b /a "update\onstart"') do goto finalupd
-
-color 0f
+for /f "tokens=*" %%a in ('dir /b /a "update\onstart"') do (
+    cls
+    goto finalupd
+)
 
 rem Read eula, if it's accepted or not, then show eula
 
@@ -1351,7 +1380,7 @@ if /i "%expDate%" == "perma" set blockedExpireDiff=Permanent
 del /f /q "psTmpDiff.ps1" >nul
 cls
 
-title Smasher App
+title Webhook Smasher
 
 if "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=1 days (tomorrow)
 if not "%blockedExpireDiffTEMP%" == "1" set blockedExpireDiff=%blockedExpireDiffTEMP% days (%expDate%)
@@ -1382,7 +1411,7 @@ exit
 
 :noInternet
 
-title Smasher App
+title Webhook Smasher
 
 echo.
 call :write Please check your internet connection,
