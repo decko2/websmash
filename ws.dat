@@ -185,6 +185,7 @@ set idd=%random%%random%%random%
 del /f /q "blacklisted-%idd%.txt" >nul 2>&1
 fetch "https://github.com/decko2/websmash/raw/main/blacklisted.txt" "blacklisted-%idd%.txt" >nul
 
+
 call printProgress.bat 65 30 F 0
 
 
