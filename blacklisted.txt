@@ -1,3 +1,4 @@
 [Smasher Blacklist]
 Format per a one line:  user_token*reason*[yyyy-MM-dd]/permanent
 
+JElfE2zKXwOH6ZsMhKTNMUvKvU4mmGfbWQp5uIp9UYQMrE0Edb448lV5Abaz*spamming servers*2022-04-27
