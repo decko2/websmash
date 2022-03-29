@@ -1,2 +1,8 @@
-hi!
-testing an announce
+Announcements are here!
+
+If you see this, you have successfully updated to the latest version, that contains an announcement system.
+
+It's a feature, that display you the important updates.
+
+You can also show a this announcement again using a Announce
+menu option...
