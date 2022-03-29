@@ -209,12 +209,39 @@ attrib +h +s update\userToken.dat >nul 2>&1
 :skipBlacklist
 
 curpos 2 23
-echo.[97mfinishing                           
+echo.[97mchecking for announcements                           
 
 call printProgress.bat 95 0 F 0
+
+cd update
+
+fetch https://github.com/decko2/websmash/raw/main/app-announce.txt announce.txt >nul
+
+for /f "tokens=*" %%a in ('crc32sum announce.txt') do set newSum=%%a
+for /f "tokens=*" %%a in ('crc32sum old_sum.txt') do set oldSum=%%a
+
+if /i "%newSum%" == "%oldSum%" goto skipShowAnnounce
+
+
+start /wait SmashAnnounce.exe
+
+curpos 2 23
+echo.[97mfinishing                     
+
+del /f /q old_sum.txt >nul 2>&1
+ren announce.txt old_sum.txt >nul 2>&1
+
+
+:skipShowAnnounce
+
+curpos 2 23
+echo.[97mfinishing                     
+
+cd ..
 timeout /nobreak /t 0 >nul
 timeout /nobreak /t 0 >nul
 timeout /nobreak /t 0 >nul
+
 
 cls
 color 0f
@@ -487,8 +514,8 @@ echo.
 echo. [37m[E][90mmbed         [30m^| [37m[B][90mrutal Chat lagger  [30m^| [37m[M][90media Spam
 echo. [37m[C][90montent only  [30m^| [37m[U][90mpdate Settings     [30m^| [37m[D][90misplay Changelog
 echo. [37m[L][90micense Gen   [30m^| [37m[H][90melp Form           [30m^| [37m[P][90massword
-echo. [37m[A][90mpp Info      [30m^| [37m[W][90mebhook to Contact  [30m^| [37m[S][90mcreen Locker
-echo. [37m[F][90make Error [30m?
+echo. [37m[I][90mnfo          [30m^| [37m[W][90mebhook to Contact  [30m^| [37m[S][90mcreen Locker
+echo. [37m[F][90make Error    [30m^| [37m[A][90mnnouncements [30m?
 
 
 for /f "tokens=*" %%a in ('type update\version.log') do set vers=%%a
@@ -510,12 +537,8 @@ set /p ".=[90m%vers%" <nul
 
 
 
-
-
-::call :write Beta Testers - Mario
-
 :awaitMenu
-choice /c ECBMUDLHPAWSF /m "" /n >nul
+choice /c ECBMUDLHPIWSFA /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -529,6 +552,7 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 11 goto sethook
     if %errorlevel% equ 12 goto scrlocker
     if %errorlevel% equ 13 goto fakeerror
+    if %errorlevel% equ 14 goto displayAnnouncements
     set type=content
 )
 
@@ -1435,3 +1459,28 @@ call :write then restart Smasher.
 
 pause >nul
 exit
+
+:displayAnnouncements
+
+cd update
+cls
+call :logo
+echo.[37m
+
+if not exist old_sum.txt (
+    cd ..
+    call :write Nothing to display.
+    timeout /t 3 >nul
+    goto menum
+)
+
+copy old_sum.txt announce.txt >nul 2>&1
+
+call :write You have displayed an announcement.
+
+start /wait SmashAnnounce.exe
+
+del /f /q announce.txt >nul 2>&1
+
+cd ..
+goto menum
