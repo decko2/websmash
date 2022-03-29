@@ -1,4 +1,3 @@
-+ Security Improvements
-+ Added 'Immediate Update'
-+ Disabled 'ALT+F4' in Screen Locker on the cooldown screen
-+ Other small fixes/improvements
++ Added Announcements
+
+*i probably add the installer package in a future, but idk...
