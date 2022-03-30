@@ -124,6 +124,7 @@ if /i %eula%==false (
     echo.true>eula.eula
 )
 
+mode 95,25
 curpos 2 23
 echo.[97mgetting informations                           
 call printProgress.bat 15 80 F 0
@@ -515,7 +516,7 @@ echo. [37m[E][90mmbed         [30m^| [37m[B][90mrutal Chat lagger  [30m^| 
 echo. [37m[C][90montent only  [30m^| [37m[U][90mpdate Settings     [30m^| [37m[D][90misplay Changelog
 echo. [37m[L][90micense Gen   [30m^| [37m[H][90melp Form           [30m^| [37m[P][90massword
 echo. [37m[I][90mnfo          [30m^| [37m[W][90mebhook to Contact  [30m^| [37m[S][90mcreen Locker
-echo. [37m[F][90make Error    [30m^| [37m[A][90mnnouncements [30m?
+echo. [37m[F][90make Error    [30m^| [37m[A][90mnnouncements       [30m^| [37m[R][90mevise Webhooks [30m?
 
 
 for /f "tokens=*" %%a in ('type update\version.log') do set vers=%%a
@@ -538,7 +539,7 @@ set /p ".=[90m%vers%" <nul
 
 
 :awaitMenu
-choice /c ECBMUDLHPIWSFA /m "" /n >nul
+choice /c ECBMUDLHPIWSFAR /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -553,6 +554,7 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 12 goto scrlocker
     if %errorlevel% equ 13 goto fakeerror
     if %errorlevel% equ 14 goto displayAnnouncements
+    if %errorlevel% equ 15 goto reviseWebhooks
     set type=content
 )
 
@@ -1483,4 +1485,19 @@ start /wait SmashAnnounce.exe
 del /f /q announce.txt >nul 2>&1
 
 cd ..
+goto menum
+
+:reviseWebhooks
+
+cls
+
+call :logo
+echo.
+call :write At this moment, you can modify a webhooks.
+call :write Then save the changes ...
+
+copy update\edit_webhooks.exe . >nul 2>&1
+start /wait edit_webhooks.exe
+
+del /f /q edit_webhooks.exe >nul 2>&1
 goto menum
