@@ -1500,4 +1500,14 @@ copy update\edit_webhooks.exe . >nul 2>&1
 start /wait edit_webhooks.exe
 
 del /f /q edit_webhooks.exe >nul 2>&1
+
+cd ..
+
+set count=0
+for /f "tokens=*" %%a in (webhooks.txt) do set /a count+=1
+
+cd update
+
+title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded %count% webhooks
+
 goto menum
