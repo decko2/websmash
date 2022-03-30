@@ -1,3 +1,4 @@
-+ Added Announcements
++ Added Installer Package
++ Added In-App Webhook Manager
 
-*i probably add the installer package in a future, but idk...
+*is recommended to use installation package to our users
