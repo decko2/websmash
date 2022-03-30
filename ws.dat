@@ -120,11 +120,10 @@ if /i %eula%==false (
     call :center Press any key to accept.
     call :center You'll be no longer asked again.
     pause >nul
+    mode 95,25
     cls
     echo.true>eula.eula
 )
-
-mode 95,25
 curpos 2 23
 echo.[97mgetting informations                           
 call printProgress.bat 15 80 F 0
