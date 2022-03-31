@@ -1543,13 +1543,14 @@ goto menum
 cls
 call :logo
 echo.
-call :write Debug Tools
+call :write Debug Tools [experimental]
 echo.
 echo. [37m[E][90mxport Log    [30m^| [37m[U][90mninstaller         [30m^| [37m[R][90mestore Tool
 echo.
-secondchoice /C "EUR" /M "" /N >nul
+secondchoice /C "EURM" /M "" /N >nul
 
 if %errorlevel%==1 goto ExportLog
+if %errorlevel%==4 goto MoveInstallation
 if %errorlevel%==2 (
     cd update
     start cmd /c Uninstall_Smasher.cmd
@@ -1583,3 +1584,5 @@ del /f /q savebox.exe >nul 2>&1
 cd ..
 
 goto menum
+
+
