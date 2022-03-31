@@ -1,4 +1,4 @@
 + Added Installer Package
 + Added In-App Webhook Manager
-
-*is recommended to use installation package to our users
++ Experimental Debug Tools
++ Bug Fixes
