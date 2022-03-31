@@ -542,6 +542,9 @@ echo. [37m[C][90montent only  [30m^| [37m[U][90mpdate Settings     [30m^| 
 echo. [37m[L][90micense Gen   [30m^| [37m[H][90melp Form           [30m^| [37m[P][90massword
 echo. [37m[I][90mnfo          [30m^| [37m[W][90mebhook to Contact  [30m^| [37m[S][90mcreen Locker
 echo. [37m[F][90make Error    [30m^| [37m[A][90mnnouncements       [30m^| [37m[R][90mevise Webhooks [30m?
+echo.
+echo. [37m[+][90m Debug tools
+
 
 
 for /f "tokens=*" %%a in ('type update\version.log') do set vers=%%a
@@ -564,7 +567,7 @@ set /p ".=[90m%vers%" <nul
 
 
 :awaitMenu
-choice /c ECBMUDLHPIWSFAR /m "" /n >nul
+secondchoice /c "ECBMUDLHPIWSFAR+" /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -580,6 +583,7 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 13 goto fakeerror
     if %errorlevel% equ 14 goto displayAnnouncements
     if %errorlevel% equ 15 goto reviseWebhooks
+    if %errorlevel% equ 16 goto debugTools
     set type=content
 )
 
@@ -1358,7 +1362,7 @@ cls
 
 taskkill /f /im explorer.exe >nul
 
-timeout /nobreak /t 1 >nul
+timeout /nobreak /t 0 >nul
 start screen_locker_smash.exe
 
 
@@ -1374,9 +1378,8 @@ if exist unlockpc.tmp (
     set wqmsg=Smasher's Screen Locker has been unlocked using a correct password.
     curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
-    timeout /t 3 >nul
     start explorer.exe
-    timeout /t 1 >nul
+    timeout /nobreak /t 2 >nul
     taskkill /f /im screen_locker_smash.exe >nul
     goto endlooplock
 ) 
@@ -1526,13 +1529,57 @@ start /wait edit_webhooks.exe
 
 del /f /q edit_webhooks.exe >nul 2>&1
 
-cd ..
+setlocal enabledelayedexpansion
 
 set count=0
 for /f "tokens=*" %%a in (webhooks.txt) do set /a count+=1
 
+title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded !count! webhooks
+
+endlocal
+goto menum
+
+:debugTools
+cls
+call :logo
+echo.
+call :write Debug Tools
+echo.
+echo. [37m[E][90mxport Log    [30m^| [37m[U][90mninstaller         [30m^| [37m[R][90mestore Tool
+echo.
+secondchoice /C "EUR" /M "" /N >nul
+
+if %errorlevel%==1 goto ExportLog
+if %errorlevel%==2 (
+    cd update
+    start cmd /c Uninstall_Smasher.cmd
+    exit
+)
+if %errorlevel%==3 (
+    cd update
+    start cmd /c RestoreTool.bat
+    exit
+)
+goto menum
+
+:ExportLog
+
+cls
+call :logo
+echo.
+call :write Exporting log ...
+
 cd update
 
-title Webhook Smasher ^| dsc.gg/shrekova-bazina ^| Loaded %count% webhooks
+fetch https://github.com/decko2/websmash/raw/main/additional/SaveFileBox.exe "savebox.exe" >nul 
+
+for /f "tokens=*" %%s in ('savebox *.log .. "Export Log"') do set ExportDestination=%%s
+
+if exist "%ExportDestination%" del /f /q "%ExportDestination%" >nul 2>&1
+
+copy "update_logging.log" "%ExportDestination%" >nul 2>&1
+del /f /q savebox.exe >nul 2>&1
+
+cd ..
 
 goto menum
