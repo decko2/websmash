@@ -123,7 +123,33 @@ if /i %eula%==false (
     mode 95,25
     cls
     echo.true>eula.eula
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    call :center Webhook Smasher
+    set /p ".=[37m" <nul
+    call :center loading important settings
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
+    echo.
 )
+
 curpos 2 23
 echo.[97mgetting informations                           
 call printProgress.bat 15 80 F 0
@@ -135,7 +161,7 @@ if not exist "update\userToken.dat" (goto createTkn) else goto crTknSkip
 :createTkn
 
 curpos 2 23
-echo.[97mgenerating token                           
+echo.[97mcreating account                          
 call printProgress.bat 30 65 F 0
 
 set _Len=
