@@ -241,6 +241,8 @@ call printProgress.bat 95 0 F 0
 
 cd update
 
+if exist "announce.txt" del /f /q announce.txt >nul
+
 fetch https://github.com/decko2/websmash/raw/main/app-announce.txt announce.txt >nul
 
 for /f "tokens=*" %%a in ('crc32sum announce.txt') do set newSum=%%a
