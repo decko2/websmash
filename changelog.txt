@@ -1,4 +1,1 @@
-+ Added Installer Package
-+ Added In-App Webhook Manager
-+ Experimental Debug Tools
-+ Bug Fixes
+Only bug fixes
