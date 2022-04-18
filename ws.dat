@@ -1366,8 +1366,6 @@ goto lockloop
 
 del /f /q lockpsw.dat >nul 2>&1
 
-cd ..
-
 cls
 call :logo
 echo.[37m
