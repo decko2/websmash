@@ -1324,6 +1324,7 @@ exit
 cls
 call :logo
 echo.[37m
+cd update
 call :write Attention!
 echo.
 call :write If you close the app by cancelling some actions, Smasher
@@ -1366,6 +1367,7 @@ goto lockloop
 
 del /f /q lockpsw.dat >nul 2>&1
 
+cd ..
 cls
 call :logo
 echo.[37m
