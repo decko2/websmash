@@ -1,7 +1,20 @@
-Today,
+Hi,
 
-we fixed some bugs and improved Webhook Contact feature! We're recommending to re-set the webhook.
-Thank you all for using a Smasher App.
+many of people are scared of malwares, etc.. 
+this announcement is about new screen locker!
+
+Don't worry, the new screen locker will require administrator privileges for you
+because of automatical disabling task manager, regedit and etc..
+
+Publisher is unknown, that's the reason of this announcement.
+The screen locker is safe, made by us, not a malware, so it's safe
+to allow administrator ...
+
+Keep in mind.. if anyone send you a copy of screen locker, DON'T OPEN IT!
+Open only executables from verified publisher, or from us.
+
+Thank you for reading! :)
+#staysafe
 
 Have a nice day,
 Smasher Team
