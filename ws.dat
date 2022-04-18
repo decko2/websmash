@@ -1324,47 +1324,14 @@ exit
 cls
 call :logo
 echo.[37m
-call :write Please, enter a unlocking password, or keep this empty to exit.
+call :write Attention!
 echo.
-set h=%random%---%random%
-set scrpassword=%h%
-call :prom scrpassword
+call :write If you close the app by cancelling some actions, Smasher
+call :write will be unusable, so restarting will be needed.
 
-if "%scrpassword%" == "%h%" goto menum
+del /f /q unlockpc.tmp >nul 2>&1
+del /f /q invpsw.tmp >nul 2>&1
 
-
-cls
-call :logo
-echo.[37m
-call :write The locker will be executed in 20 seconds.
-call :write You can also press any key to run it now!
-echo.
-call :write Please, remember this password:
-call :write %scrpassword%
-echo.
-echo.
-call :write If you entered the bad password,
-call :write close smasher now.
-
-timeout /t 20 >nul
-
-
-
-cls
-cd update
-
-del /f /q unlockpc.tmp >nul
-del /f /q invpsw.tmp >nul 
-
-cls
-
-(
-    set /p ".=%scrpassword%" <nul
-)>lockpsw.dat
-
-taskkill /f /im explorer.exe >nul
-
-timeout /nobreak /t 0 >nul
 start screen_locker_smash.exe
 
 
@@ -1397,7 +1364,7 @@ goto lockloop
 
 :endlooplock
 
-del /f /q lockpsw.dat
+del /f /q lockpsw.dat >nul 2>&1
 
 cd ..
 
