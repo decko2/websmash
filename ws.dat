@@ -1374,15 +1374,13 @@ timeout /t 1 >nul
 
 if exist unlockpc.tmp (
     del /f /q unlockpc.tmp >nul
+    start explorer.exe
 
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
     set wqmsg=Smasher's Screen Locker has been unlocked using a correct password.
     curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
 
-    start explorer.exe
-    timeout /nobreak /t 2 >nul
-    taskkill /f /im screen_locker_smash.exe >nul
     goto endlooplock
 ) 
 
@@ -1406,7 +1404,7 @@ cd ..
 cls
 call :logo
 echo.[37m
-call :write Computer successfully unlocked.
+call :write Screen locker has been ended Successfully.
 
 pause >nul
 
