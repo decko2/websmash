@@ -1330,7 +1330,7 @@ echo.
 call :write If you close the app by cancelling some actions, Smasher
 call :write will be unusable, so restarting will be needed.
 echo.
-call :write Note: ALLOW ADMINISTRATOR PRIVILEGES FOR 100%% OF FUNCTIONALITY
+call :write Note: ALLOW ADMINISTRATOR PRIVILEGES
 
 del /f /q unlockpc.tmp >nul 2>&1
 del /f /q invpsw.tmp >nul 2>&1
