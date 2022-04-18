@@ -1,2 +1,3 @@
-+ Bug Fixes
-and more...
++ Extended Screen Locker app (safer, better)
++ Modified In-Smasher Screen locker managerment.
++ Bug fixes.
