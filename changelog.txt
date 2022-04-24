@@ -1,3 +1,4 @@
-+ Extended Screen Locker app (safer, better)
-+ Modified In-Smasher Screen locker managerment.
++ Added startup update checker, can be disabled.
++ Only, if you get success message while updating!
+
 + Bug fixes.
