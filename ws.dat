@@ -937,14 +937,14 @@ if %errorlevel%==4 (
 )
 
 if %errorlevel%==5 (
-    if exist startup_updater.log (
-        del /f /q startup_updater.log >nul
+    if exist update\startup_updater.log (
+        del /f /q update\startup_updater.log >nul
         cls
         call :logo
         echo.
         call :write Startup updates disabled.
     ) else (
-        echo.>startup_updater.log
+        echo.>update\startup_updater.log
         cls
         call :logo
         echo.
