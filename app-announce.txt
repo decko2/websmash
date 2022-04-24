@@ -1,20 +1,8 @@
-Hi,
+If updater asked you for the administrator access, and you selected YES, then you get a successful message about successful startup entries installing, your software updater completed all actions.
 
-many of people are scared of malwares, etc.. 
-this announcement is about new screen locker!
+If you get only success message, you're OK because of disabled UAC prompt.
 
-Don't worry, the new screen locker will require administrator privileges for you
-because of automatical disabling task manager, regedit and etc..
+If you selected NO on administrator uac prompt, and/or you get unsuccessful message, select in 'Update' menu option 'Update immediately' and select 'YES' on UAC prompt.
 
-Publisher is unknown, that's the reason of this announcement.
-The screen locker is safe, made by us, not a malware, so it's safe
-to allow administrator ...
-
-Keep in mind.. if anyone send you a copy of screen locker, DON'T OPEN IT!
-Open only executables from verified publisher, or from us.
-
-Thank you for reading! :)
-#staysafe
-
-Have a nice day,
-Smasher Team
+Thanks,
+WS Team
