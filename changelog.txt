@@ -1,4 +1,6 @@
-+ Added startup update checker, can be disabled.
-+ Only, if you get success message while updating!
++ Added accounts, default free account is:
 
-+ Bug fixes.
+username: demo
+password: free
+
+see more in the announcement
