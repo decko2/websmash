@@ -1754,14 +1754,11 @@ if %errorlevel%==2 (
     cls
     call :logo
     echo.
-    call :write Are you sure about unlogging?
-    call :write This will remove your account from your device,
-    call :write you will be able to login again.
+    call :write Press any key to unlog ...
+    call :write You will be asked for log-in credintials again!
     echo.
-    call :write Continuing will close app!
-    call :write Continue?    [90mY/N
-    secondchoice /C YN /M "" /N >nul
-    if %errorlevel%==2 goto accInfos
+    call :write This action will close the app.
+    pause >nul
 
     cd update
     del /f /q my_account.txt >nul
