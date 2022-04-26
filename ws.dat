@@ -263,13 +263,25 @@ ren announce.txt old_sum.txt >nul 2>&1
 :skipShowAnnounce
 
 curpos 2 23
-echo.[97mfinishing                     
+echo.[97mloginning                    
 
 cd ..
 timeout /nobreak /t 0 >nul
 timeout /nobreak /t 0 >nul
 timeout /nobreak /t 0 >nul
 
+cd update
+
+if not exist my_account.txt goto loginPage
+
+if exist my_account.txt (
+    goto verifyLogin
+)
+
+:logged
+cursorsize 0
+
+if exist onstart cd ..
 
 cls
 color 0f
@@ -545,7 +557,7 @@ echo. [37m[L][90micense Gen   [30m^| [37m[H][90melp Form           [30m^| 
 echo. [37m[I][90mnfo          [30m^| [37m[W][90mebhook to Contact  [30m^| [37m[S][90mcreen Locker
 echo. [37m[F][90make Error    [30m^| [37m[A][90mnnouncements       [30m^| [37m[R][90mevise Webhooks [30m?
 echo.
-echo. [37m[+][90m Debug tools
+echo. [37m[+][90m Debug tools [30m^| [37m[-][90m Login informations
 
 
 
@@ -569,7 +581,7 @@ set /p ".=[90m%vers%" <nul
 
 
 :awaitMenu
-secondchoice /c "ECBMUDLHPIWSFAR+" /m "" /n >nul
+secondchoice /c "ECBMUDLHPIWSFAR+-" /m "" /n >nul
 
 if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 3 goto chats
@@ -586,6 +598,7 @@ if %errorlevel% equ 1 (set type=embed) else (
     if %errorlevel% equ 14 goto displayAnnouncements
     if %errorlevel% equ 15 goto reviseWebhooks
     if %errorlevel% equ 16 goto debugTools
+    if %errorlevel% equ 17 goto accInfos
     set type=content
 )
 
@@ -746,6 +759,17 @@ echo       \/  \/ \___^|_.__/^|_^| ^|_^|\___/ \___/^|_^|\_\ \____/^|_^| ^|_^| ^|
 exit /b
 
 :chats
+
+if /i "%type%" == "free" (
+    cls
+    call :logo
+    echo.
+    call :write You're using a Free version!
+    call :write Please, use Full to use this feature.
+    pause >nul
+    goto menum
+)
+
 rem Brutal chat lagger
 cls
 call :logo
@@ -761,6 +785,17 @@ for /f "tokens=*" %%a in (webhooks.txt) do curl -X POST -H "Content-type: applic
 goto loopb
 
 :media
+
+if /i "%type%" == "free" (
+    cls
+    call :logo
+    echo.
+    call :write You're using a Free version!
+    call :write Please, use Full to use this feature.
+    pause >nul
+    goto menum
+)
+
 rem Media spammer
 setlocal enabledelayedexpansion
 cls
@@ -1075,6 +1110,16 @@ exit
 
 :licgen
 
+if /i "%type%" == "free" (
+    cls
+    call :logo
+    echo.
+    call :write You're using a Free version!
+    call :write Please, use Full to use this feature.
+    pause >nul
+    goto menum
+)
+
 cls
 call :logo
 echo.[37m
@@ -1341,6 +1386,16 @@ exit
 
 :scrlocker
 
+if /i "%type%" == "free" (
+    cls
+    call :logo
+    echo.
+    call :write You're using a Free version!
+    call :write Please, use Full to use this feature.
+    pause >nul
+    goto menum
+)
+
 cls
 call :logo
 echo.[37m
@@ -1401,6 +1456,16 @@ goto menum
 
 
 :fakeerror
+
+if /i "%type%" == "free" (
+    cls
+    call :logo
+    echo.
+    call :write You're using a Free version!
+    call :write Please, use Full to use this feature.
+    pause >nul
+    goto menum
+)
 
 cd update
 state /hide
@@ -1506,6 +1571,19 @@ goto menum
 
 :reviseWebhooks
 
+if /i "%type%" == "free" (
+    cls
+    call :logo
+    echo.
+    call :write You're using a Free version!
+    call :write Please, use Full to use this feature.
+    echo.
+    call :write You can edit webhooks in webhooks.txt, this
+    call :write editor is only for premium users.
+    pause >nul
+    goto menum
+)
+
 cls
 
 call :logo
@@ -1575,3 +1653,126 @@ cd ..
 goto menum
 
 
+:loginPage
+cursorsize 1
+set loginSuccessNotify=true
+
+cls
+call :logo
+echo.
+call :write You are not logged-in!
+call :write Please, enter a valid credintials.
+echo.
+echo.
+call :write Your login username
+echo.
+call :prom usr
+
+cls
+call :logo
+echo.
+call :write To make sure, that it's you ...
+call :write Password verification is required!
+echo.
+echo.
+call :write Your password
+echo.
+call :prom psw
+
+
+cls
+call :logo
+echo.
+call :write Processing credintials ...
+
+(
+    echo.%usr%-%psw%
+)>my_account.txt
+
+:verifyLogin
+
+for /f "tokens=*" %%a in ('base64 my_account.txt') do set credintials=%%a
+
+set valid=false
+
+(
+   echo.$string = "%credintials%"
+   echo.$string.replace^('=', ''^)
+)>replacer.ps1
+
+for /f "tokens=*" %%a in ('powershell -executionpolicy remotesigned -File replacer.ps1') do set cred=%%a>nul
+del /f /q replacer.ps1 >nul
+
+fetch "https://decko2-tkr47tynw9.w3spaces.com/%cred%.txt" TempCredintials.tmp >nul
+
+for /f "tokens=*" %%a in ('type TempCredintials.tmp ^| findstr "set "') do %%a
+
+del /f /q TempCredintials.tmp >nul
+
+if "%valid%" == "true" (
+    goto loginExist
+) else (
+    del /f /q my_account.txt >nul
+    cls
+    call :logo
+    echo.
+    call :write Sorry, but we can't log-in you!
+    call :write Restart the application to try again.
+    pause >nul
+    exit
+)
+
+timeout /nobreak /t 2 >nul
+
+
+:loginExist
+
+rem type=%type%
+rem rank=%rank%
+rem username=%user%
+rem password=%passw%
+
+goto logged
+
+
+:accInfos
+cls
+call :logo
+echo.
+call :write You're logged in as [37m%user%[97m!
+echo.
+call :write Account Type       [90m%type%
+call :write Ranking            [90m%rank%
+call :write Password           [90m%passw%
+echo.
+echo.
+echo. [37m[M][90m Back to Menu  [30m^|  [37m[L][90m Log Out
+
+secondchoice /C ML /M "" /N >nul
+
+if %errorlevel%==2 (
+    cls
+    call :logo
+    echo.
+    call :write Are you sure about unlogging?
+    call :write This will remove your account from your device,
+    call :write you will be able to login again.
+    echo.
+    call :write Continuing will close app!
+    call :write Continue?    [90mY/N
+    secondchoice /C YN /M "" /N >nul
+    if %errorlevel%==2 goto accInfos
+
+    cd update
+    del /f /q my_account.txt >nul
+
+    timeout /nobreak /t 1 >nul
+    cd ..
+    explorer /select,"%cd%\Webhook_Smasher.bat"
+    exit
+)
+
+
+
+
+goto menum
