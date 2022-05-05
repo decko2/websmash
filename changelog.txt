@@ -1,6 +1,1 @@
-+ Added accounts, default free account is:
-
-username: demo
-password: free
-
-see more in the announcement
++ Security improvements
