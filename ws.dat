@@ -272,6 +272,15 @@ timeout /nobreak /t 0 >nul
 
 cd update
 
+if not exist "t.tmp" (
+    echo.%time:~0,5%>t.tmp
+    goto skipcheckspam
+)
+
+for /f "tokens=*" %%a in ('type t.tmp') do if /i "%time:~0,5%" == "%%a" (goto spamlogin) else echo.%time:~0,5%>t.tmp
+
+
+:skipcheckspam
 if not exist my_account.txt goto loginPage
 
 if exist my_account.txt (
@@ -1773,3 +1782,15 @@ if %errorlevel%==2 (
 
 
 goto menum
+
+
+
+:spamlogin
+cls
+call :logo 
+echo.
+call :write You're loggining too fast!
+call :write Please, wait a while before loginning again.
+
+pause >nul
+exit
