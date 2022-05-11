@@ -1,13 +1,2 @@
--- IMPORTANT MESSAGE --
-
-You will now be asked for the password because of new security feature.
-
-Your default credintials are:
-
-Username: demo
-Password: free
-
-If you enter credintials incorrectly, you will lose
-access to the smasher.
-
-You can ask developer for a own account with own password.
+Check out the new license generator!
+Now, 2.1 created by us. :3
