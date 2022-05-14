@@ -1548,7 +1548,8 @@ exit
 
 
 :noInternet
-
+cls
+call :logo
 title Webhook Smasher
 
 echo.
@@ -1670,34 +1671,27 @@ goto menum
 :loginPage
 cursorsize 1
 set loginSuccessNotify=true
+cls
+call :logo
+
+for /f "tokens=1,2 delims=;" %%a in ('login-form.exe') do (
+    if /i "%%a" == "undefined" goto undefinedLogin
+
+    set usr=%%a
+    set psw=%%b
+)
+
+
+
+ping -n 1 www.google.com >nul
+if not %errorlevel%==0 goto noInternet
 
 cls
 call :logo
 echo.
-call :write You are not logged-in!
-call :write Please, enter a valid credintials.
-echo.
-echo.
-call :write Your login username
-echo.
-call :prom usr
-
-cls
-call :logo
-echo.
-call :write To make sure, that it's you ...
-call :write Password verification is required!
-echo.
-echo.
-call :write Your password
-echo.
-call :prom psw
-
-
-cls
-call :logo
-echo.
-call :write Processing credintials ...
+call :write Please wait!
+call :write Verification is running ...
+timeout /nobreak /t 2 >nul
 
 (
     echo.%usr%-%psw%
@@ -1730,8 +1724,8 @@ if "%valid%" == "true" (
     cls
     call :logo
     echo.
-    call :write Sorry, but we can't log-in you!
-    call :write Restart the application to try again.
+    call :write We're sorry!
+    call :write An error has occured, while attempting to log-in.
     pause >nul
     exit
 )
@@ -1797,5 +1791,13 @@ echo.
 call :write You're loggining too fast!
 call :write Please, wait a while before loginning again.
 
+pause >nul
+exit
+
+:undefinedLogin
+cls
+call :logo
+echo.
+call :write Login credintials are undefined!
 pause >nul
 exit
