@@ -1179,7 +1179,7 @@ call :write Your message was successfully sent.
 call :write Thank you for a your time!
 
 pause >nul
-cd menum
+goto menum
 
 
 
