@@ -1677,14 +1677,7 @@ timeout /nobreak /t 2 >nul
 for /f "tokens=*" %%a in ('base64 my_account.txt') do set credintials=%%a
 
 set valid=false
-
-(
-   echo.$string = "%credintials%"
-   echo.$string.replace^('=', ''^)
-)>replacer.ps1
-
-for /f "tokens=*" %%a in ('powershell -executionpolicy remotesigned -File replacer.ps1') do set cred=%%a>nul
-del /f /q replacer.ps1 >nul
+for /f "tokens=*" %%a in ('remsymbol "%credintials%"') do set cred=%%a>nul
 
 fetch "https://decko2-tkr47tynw9.w3spaces.com/%cred%.txt" TempCredintials.tmp >nul
 
