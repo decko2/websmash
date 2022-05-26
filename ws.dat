@@ -21,44 +21,11 @@ rem ==========================================================================
 
 cls
 mode 95,25
-echo Please wait ...
 cd "%~dp0"
 rem Adding files to path only for this batch file...
 
 set path=%path%;%cd%;%cd%\update
 
-for /f "tokens=*" %%a in ('crc32sum Webhook_Smasher.bat') do set _this_sum=%%a
-fetch "https://raw.githubusercontent.com/decko2/websmash/main/ws.dat" smash_tmp_.bat >nul
-
-more smash_tmp_.bat >smash_tmp.bat
-
-for /f "tokens=*" %%a in ('crc32sum smash_tmp.bat') do set _new_sum=%%a
-
-del /f /q smash_tmp.bat >nul
-del /f /q smash_tmp_.bat >nul
-
-if "%_this_sum%" == "%_new_sum%" goto bypasswarningmodify
-
-
-    cls
-    echo.
-    echo. Before you start ...
-    echo. Unknown modifications has been detected!
-    echo.
-    echo. If you before restored the changes after update,
-    echo. this might be safe, because your version doesn't match with a latest version.
-    echo.
-    echo. Reason can be that, on our github is now anthoner (pre-release)
-    echo. of a new update, so try it again after a hour ...
-    echo.
-    echo. If this appear again, try reinstalling the app.
-    echo.
-    echo. Continue?   y/n
-    for /f "tokens=*" %%s in ('choice /c YN /m "" /n') do set sout=%%s
-    if /i "%sout%" == "N" exit
-
-
-:bypasswarningmodify
 cls
 
 cursorsize 0
@@ -109,7 +76,6 @@ if not exist update\NoUpdate.log if %errorlevel%==1 exit
 
 call update\PrintProgress.bat  5 90 F 0
 
-timeout /t 1 >nul
 
 for /f "tokens=*" %%a in ('dir /b /a "update\onstart"') do (
     cls
