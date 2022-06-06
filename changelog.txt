@@ -1,4 +1,2 @@
-+ New license gen (updated)
-+ New login UI
-+ New help (support/report) form
-+ Fixed bug, when running a powershell script
++ New diagnostics tool for common problems ...
++ New Admin Tool (to manage smasher) - see announcement
