@@ -1,2 +1,6 @@
-Make sure, you're on the latest version!
-Important changes were made.
+Byla přidána nová funkce 'Admin Panel', která pomůže při správě smasheru hlavně tím, že je jednoduše udělaná v GUI. Aneb žádný příkazový řádek pro nastavování.
+Prosím, pamatuj, že tato nová funkce je v testování a není kompletní, taktéž může obsahovat chyby, proto očekávej nové updaty zaměřující se právě na tuhle funkci.
+
+Funkce bude požadovat heslo pro přístup (bez hesla není šance, aby jsi mohl aplikaci spravovat, jelikož i po bypassu hesla je veškerá kontrola nad tlačítky a jinými prvky, týkajíci se vypsanými informacemi zablokována/neviditelná.)... Základní heslo je 'admin', které zatím nejde změnit, v budoucnu možná změnit půjde.
+
+Diagnostics tool jde spustit v admin panelu hned v dashboardu (defaultní stránce). Po spuštění se zkontrolují aktualizace, známé hrozby, kterými by mohl být Smasher infikován a důležité soubory pro správnou funkci. Diagnostics tool je taktéž ve vývoji a zatím nemá funkce sebe opravení, což možná bude v budoucích aktualizacích. Funkce dekekce problémů se bude časem zlepšovat, zatím to není až tak dobré, aby to mohlo zjistit nějaký problém. Maximálně nějaký vir či chybějící důležitý soubor, nebo chybějící aktualizace.
