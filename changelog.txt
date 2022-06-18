@@ -1,2 +1,1 @@
-+ New diagnostics tool for common problems ...
-+ New Admin Tool (to manage smasher) - see announcement
++ UI Update - forms, that have rounded corners are now square
