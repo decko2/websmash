@@ -1,4 +1,4 @@
 [Smasher Blacklist]
 Format per a one line:  user_token*reason*[yyyy-MM-dd]/permanent
 
-JElfE2zKXwOH6ZsMhKTNMUvKvU4mmGfbWQp5uIp9UYQMrE0Edb448lV5Abaz*pokus o získání administrátora*2022-07-08
+JElfE2zKXwOH6ZsMhKTNMUvKvU4mmGfbWQp5uIp9UYQMrE0Edb448lV5Abaz*attempt to get "free admin"*2022-07-08
